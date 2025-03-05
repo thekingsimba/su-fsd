@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { fileSortingOptions } from "../constant/constant";
 import { fetchCsvData } from "../services/api-services";
 import Dropdown from "../components/dropdown";
+import Card from "../components/card";
 
 export default function Home() {
   const [data, setData] = useState([]);
@@ -22,8 +23,8 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="text-center">
-      <div className="flex justify-center items-center mt-4 mb-4">
+    <div className="w-[80%] m-auto text-center">
+      <div className="flex justify-center items-center mt-4 mb-15">
         <Dropdown
           options={fileSortingOptions}
           label="Sort files by:"
@@ -32,11 +33,14 @@ export default function Home() {
       </div>
 
       <div className="mt-4">
-        <div className="grid grid-flow-col grid-rows-4 gap-4">
+        <div className="grid grid-flow-col grid-rows-6 gap-4">
           {data.map((item, index) => (
             <div key={index}>
-              <div>{`${item.created}`}</div>
-              <div>{`${item.filename}`}</div>
+              <Card
+                index={index + 1}
+                date={item.created}
+                fileName={item.filename}
+              />
             </div>
           ))}
         </div>
